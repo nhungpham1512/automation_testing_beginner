@@ -35,8 +35,10 @@ public class ExampleTestStory {
     @WithTag("testcase:example")
     @Test
     public void example_test(){
-        int days =  SelectOptions.of(By.name("DateOfBirthDay"))
-                        .answeredBy(nhung).size();
+        List<String> days =  nhung.asksFor(
+                SelectOptions.of(By.xpath("//select[@name='DateOfBirthDay']/option"))
+                        .describedAs("the number of days")
+        );
         nhung.wasAbleTo(
                 //Wait
                 Open.url("https://demo.nopcommerce.com/login?returnUrl=%2F"),
@@ -56,7 +58,8 @@ public class ExampleTestStory {
                 Select.option("15").from("//select[@name='DateOfBirthDay']"),
                 Select.optionNumber(5).from("//select[@name='DateOfBirthMonth']"),
                 Select.option("1991").from("//select[@name='DateOfBirthYear']"),
-                Ensure.that(days).isEqualTo(32),
+                Click.on("//select[@name='DateOfBirthDay']"),
+                Ensure.that(days).hasSize(32),
                 //Javascript clear
 //                Open.url("https://demo.nopcommerce.com/login?returnUrl=%2F"),
 //                Click.on("//a[text()='Register']"),

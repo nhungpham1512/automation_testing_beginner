@@ -41,7 +41,6 @@ public class AuthenticationStory {
         @WithTag("testcase:01")
     @Test
     public void should_authen_when_using_validate_user_and_validate_password() {
-
         nhung.wasAbleTo(
                 LoginAs.normalUser("rong@gmail.com","12345@"),
                 Ensure.that(LOGOUT_BUTTON).attribute("href").contains("/logout"),
