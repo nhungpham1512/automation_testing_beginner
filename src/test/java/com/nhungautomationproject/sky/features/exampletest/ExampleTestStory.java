@@ -35,11 +35,18 @@ public class ExampleTestStory {
     @WithTag("testcase:example")
     @Test
     public void example_test(){
+        nhung.attemptsTo(
+                Open.url("https://demo.nopcommerce.com/login?returnUrl=%2F"),
+                Click.on("//a[text()='Register']"),
+                Click.on("//select[@name='DateOfBirthDay']")
+        );
         List<String> days =  nhung.asksFor(
-                SelectOptions.of(By.xpath("//select[@name='DateOfBirthDay']/option"))
+                SelectOptions.of(By.xpath("//select[@name='DateOfBirthDay']"))
                         .describedAs("the number of days")
         );
         nhung.wasAbleTo(
+                //Count so luong record trong scroll bar
+                Ensure.that(days).hasSize(32),
                 //Wait
                 Open.url("https://demo.nopcommerce.com/login?returnUrl=%2F"),
                 Click.on("//a[text()='Register']").afterWaitingUntilEnabled(),
@@ -58,9 +65,11 @@ public class ExampleTestStory {
                 Select.option("15").from("//select[@name='DateOfBirthDay']"),
                 Select.optionNumber(5).from("//select[@name='DateOfBirthMonth']"),
                 Select.option("1991").from("//select[@name='DateOfBirthYear']"),
-                Click.on("//select[@name='DateOfBirthDay']"),
-                Ensure.that(days).hasSize(32),
-                //Javascript clear
+                //Select option Book
+                Open.url("https://demo.nopcommerce.com/books"),
+                Select.option("Price: Low to High").from("//select[@id='products-orderby']"),
+
+                //Javascript clearté
 //                Open.url("https://demo.nopcommerce.com/login?returnUrl=%2F"),
 //                Click.on("//a[text()='Register']"),
 //                Enter.theValue("june").into("//input[@id='FirstName']"),

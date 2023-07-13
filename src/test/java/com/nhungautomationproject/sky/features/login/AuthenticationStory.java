@@ -38,9 +38,9 @@ public class AuthenticationStory {
         nhung.can(BrowseTheWeb.with(herBrowser));
     }
 
-        @WithTag("testcase:01")
+    @WithTag("testcase:Login01")
     @Test
-    public void should_authen_when_using_validate_user_and_validate_password() {
+    public void should_authen_successfully_when_using_validate_user_and_validate_password() {
         nhung.wasAbleTo(
                 LoginAs.normalUser("rong@gmail.com","12345@"),
                 Ensure.that(LOGOUT_BUTTON).attribute("href").contains("/logout"),
@@ -49,9 +49,9 @@ public class AuthenticationStory {
                 Ensure.thatTheCurrentPage().title().isEqualTo("nopCommerce demo store")
         );
     }
-    @WithTag("testcase:02")
+    @WithTag("testcase:Login02")
     @Test
-    public void verify_login_with_invalid_email() {
+    public void should_error_message_when_using_invalid_email() {
         nhung.wasAbleTo(
                 LoginAs.normalUser("rong","12345@"),
                 Ensure.that(WRONG_EMAIL_ERROR).text().isEqualTo("Wrong email"),
@@ -59,9 +59,9 @@ public class AuthenticationStory {
         );
 
     }
-    @WithTag("testcase:03")
+    @WithTag("testcase:Login03")
     @Test
-    public void verify_login_with_wrong_email(){
+    public void should_error_message_when_using_wrong_email(){
         nhung.wasAbleTo(
                 LoginAs.normalUser("rongcon@gmail.com","12345@"),
                 Ensure.that(VALIDATION_EMAIL_ERROR).text().contains("Login was unsuccessful. Please correct the errors and try again.")
@@ -69,17 +69,17 @@ public class AuthenticationStory {
                 //Ensure.that(VALIDATION_EMAIL_ERROR).hasTextContent("Login was unsuccessful. Please correct the errors and try again."+"No customer account found")
         );
     }
-    @WithTag("testcase:04")
+    @WithTag("testcase:Login04")
     @Test
-    public void verify_login_with_wrong_password(){
+    public void should_error_message_when_using_wrong_password(){
         nhung.wasAbleTo(
                 LoginAs.normalUser("rong@gmail.com","123"),
                 Ensure.that(VALIDATION_EMAIL_ERROR).text().contains("The credentials provided are incorrect")
         );
     }
-    @WithTag("testcase:05")
+    @WithTag("testcase:Login05")
     @Test
-    public void verify_login_when_user_input_nothing(){
+    public void should_error_message_when_using_input_nothing(){
         nhung.wasAbleTo(
                 Open.url(LoginAs.BASE_URL),
                 Click.on(LoginAs.BUTTON_TEXT_LOG_IN),
