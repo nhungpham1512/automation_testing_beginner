@@ -45,7 +45,7 @@ public class ExampleTestStory {
                         .describedAs("the number of days")
         );
         nhung.wasAbleTo(
-                //Count so luong record trong scroll bar
+                //Count the number of record in scroll bar
                 Ensure.that(days).hasSize(32),
                 //Wait
                 Open.url("https://demo.nopcommerce.com/login?returnUrl=%2F"),
@@ -68,7 +68,6 @@ public class ExampleTestStory {
                 //Select option Book
                 Open.url("https://demo.nopcommerce.com/books"),
                 Select.option("Price: Low to High").from("//select[@id='products-orderby']"),
-
                 //Javascript clearté
 //                Open.url("https://demo.nopcommerce.com/login?returnUrl=%2F"),
 //                Click.on("//a[text()='Register']"),
